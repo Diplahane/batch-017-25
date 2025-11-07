@@ -1,0 +1,30 @@
+function moveFilesStartingWithBatch052Weekend() {
+  // Define the destination folder ID where you want to move the files
+  var destinationFolderId = 'PUT FOLDER ID HERE';
+  
+  // Get the destination folder
+  var destinationFolder = DriveApp.getFolderById(destinationFolderId);
+  
+  // Get all the files in the "home" directory (root folder)
+  var files = DriveApp.getFiles();
+  
+  // Iterate over each file
+  while (files.hasNext()) {
+    var file = files.next();
+    
+    // Check if the file name starts with "qyr"
+    if (file.getName().startsWith("MEET LINK ID HERE") && !(file.getName().endsWith("transcript"))) {
+      
+      // Move the file to the destination folder
+      destinationFolder.addFile(file);
+      
+      // Remove the file from the original folder (root folder)
+      var originalFolder = file.getParents().next();
+      originalFolder.removeFile(file);
+      
+      Logger.log('Moved file: ' + file.getName());
+    }
+  }
+  
+  Logger.log('All files starting with "MEET LINK ID HERE" have been moved.');
+}
